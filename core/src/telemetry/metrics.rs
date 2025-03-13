@@ -116,10 +116,10 @@ impl MetricsContext {
     }
 
     /// A workflow task execution failed
-    pub(crate) fn wf_task_failed(&self, workflow_id: &str) {
+    pub(crate) fn wf_task_failed(&self, workflow_id: &str) { 
         let updated_kvs = self.meter.extend_attributes(
             self.kvs.clone(),
-            vec![MetricKeyValue::new("workflow_id", workflow_id.to_string())],
+            vec![MetricKeyValue::new("workflow_id", workflow_id.to_string())].into(),
         );
         self.instruments
             .wf_task_execution_failure_counter
