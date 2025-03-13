@@ -116,10 +116,11 @@ impl MetricsContext {
     }
 
     /// A workflow task execution failed
-    pub(crate) fn wf_task_failed(&self) {
+    pub(crate) fn wf_task_failed(&self, workflow_id: &str) {
+        let updated_kvs = self.kvs.clone().extend([MetricKeyValue::new("workflow_id", workflow_id.to_string())]);
         self.instruments
             .wf_task_execution_failure_counter
-            .add(1, &self.kvs);
+            .add(1, &updated_kvs);
     }
 
     /// A workflow completed successfully

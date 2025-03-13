@@ -636,7 +636,7 @@ impl ManagedRun {
 
         self.metrics
             .with_new_attrs([metrics::failure_reason(cause.into())])
-            .wf_task_failed();
+            .wf_task_failed(&workflow_id);
         self.reply_to_complete(outcome, resp_chan);
         rur
     }
